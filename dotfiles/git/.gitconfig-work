@@ -1,0 +1,16 @@
+# This is Git's per-user configuration file.
+[user]
+	; name = 
+	; email = 
+[core]
+    sshCommand = ssh -F ~/.ssh/config -i ~/.ssh/id_ed25519
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+[credential]
+	helper = cache
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+[rebase]
+	updateRefs = true

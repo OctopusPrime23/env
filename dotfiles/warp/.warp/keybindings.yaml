@@ -1,0 +1,8 @@
+---
+"editor_view:insert_autosuggestion": tab
+"input:clear_screen": ctrl-k
+"workspace:create_personal_workflow": f1
+"pane_group:navigate_next": ctrl-l
+"input:open_completion_suggestions": "`"
+"editor_view:backspace": none
+"pane_group:navigate_prev": ctrl-h
