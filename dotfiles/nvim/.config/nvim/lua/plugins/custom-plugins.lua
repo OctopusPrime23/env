@@ -214,14 +214,14 @@ return {
     end,
     keys = {
       {
-        "<leader>ta",
+        "<leader>ea",
         function()
           require("harpoon"):list():add()
         end,
         desc = "harpoon add file",
       },
       {
-        "<leader>tm",
+        "<leader>em",
         function()
           local harpoon = require "harpoon"
           harpoon.ui:toggle_quick_menu(harpoon:list())
@@ -264,14 +264,14 @@ return {
         desc = "harpoon to file 5",
       },
       {
-        "<leader>tp",
+        "<leader>ep",
         function()
           require("harpoon"):list():prev()
         end,
         desc = "harpoon to prev file",
       },
       {
-        "<leader>tn",
+        "<leader>en",
         function()
           require("harpoon"):list():next()
         end,
@@ -299,6 +299,17 @@ return {
     -- order to load the plugin when the command is run for the first time
     keys = {
       { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
+  },
+  {
+    "crnvl96/lazydocker.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      { "<leader>ld", "<cmd>LazyDocker<cr>", desc = "LazyGit" },
     },
   },
   {
@@ -409,6 +420,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
+    enabled = false,
     event = "BufEnter",
   },
   {
@@ -488,6 +500,153 @@ return {
       }
     end,
   },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-go",
+      "nvim-neotest/nvim-nio", -- Added vim-nio dependency
+    },
+    config = function()
+      -- Get neotest namespace (api call creates or returns namespace)
+      local neotest_ns = vim.api.nvim_create_namespace "neotest"
+
+      -- Get neotest-go
+      local neotest = require "neotest"
+
+      neotest.setup {
+        -- Your neotest config here
+        adapters = {
+          require "neotest-go" {
+            args = { "-v", "-timeout=20s" },
+            recursive = true,
+            discovery = {
+              enabled = true,
+              concurrent = true,
+              filter_dir = function(name, rel_path, root)
+                return name ~= "vendor" and name ~= "testdata"
+              end,
+            },
+          },
+        },
+        -- Floating window for test output
+        floating = {
+          border = "rounded",
+          max_height = 0.8,
+          max_width = 0.8,
+          options = {},
+        },
+        -- Icons for the test status
+        icons = {
+          child_indent = "│",
+          child_prefix = "├",
+          collapsed = "─",
+          expanded = "╮",
+          failed = "✖",
+          final_child_indent = " ",
+          final_child_prefix = "╰",
+          non_collapsible = "─",
+          passed = "✔",
+          running = "↻",
+          running_animated = { "/", "|", "\\", "-", "/", "|", "\\", "-" },
+          skipped = "ﰸ",
+          unknown = "?",
+        },
+        -- Output handling
+        output = {
+          enabled = true,
+          open_on_run = true,
+        },
+        -- Status handling
+        status = {
+          enabled = true,
+          signs = true,
+          virtual_text = false,
+        },
+      }
+    end,
+    keys = {
+      -- Run nearest test
+      {
+        "<leader>tn",
+        function()
+          require("neotest").run.run()
+        end,
+        desc = "Run nearest test",
+      },
+      -- Run current file
+      {
+        "<leader>tf",
+        function()
+          require("neotest").run.run(vim.fn.expand "%")
+        end,
+        desc = "Run test file",
+      },
+      -- Run all tests
+      {
+        "<leader>ta",
+        function()
+          local neotest = require "neotest"
+          neotest.run.run {
+            suite = true,
+            extra_args = { "./..." },
+          }
+        end,
+        desc = "Run all tests",
+      },
+      -- Stop nearest test
+      {
+        "<leader>ts",
+        function()
+          require("neotest").run.stop()
+        end,
+        desc = "Stop test",
+      },
+      -- Toggle output panel
+      {
+        "<leader>tp",
+        function()
+          require("neotest").output_panel.toggle()
+        end,
+        desc = "Toggle test output panel",
+      },
+      -- Toggle summary window
+      {
+        "<leader>tt",
+        function()
+          require("neotest").summary.toggle()
+        end,
+        desc = "Toggle test summary",
+      },
+      -- Jump to next failed test
+      {
+        "<leader>tj",
+        function()
+          require("neotest").jump.next { status = "failed" }
+        end,
+        desc = "Jump to next failed test",
+      },
+      -- Jump to previous failed test
+      {
+        "<leader>tk",
+        function()
+          require("neotest").jump.prev { status = "failed" }
+        end,
+        desc = "Jump to previous failed test",
+      },
+      -- Show test output
+      {
+        "<leader>to",
+        function()
+          require("neotest").output.open { enter = true }
+        end,
+        desc = "Show test output",
+      },
+    },
+  },
+
   -- {
   --   "jackMort/ChatGPT.nvim",
   --   enabled = false,

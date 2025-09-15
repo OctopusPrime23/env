@@ -40,3 +40,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.opt.backupext = "-" .. vim.fn.strftime "%Y%m%d%H%M"
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "sql",
+  callback = function()
+    vim.opt_local.commentstring = "-- %s"
+  end,
+})
