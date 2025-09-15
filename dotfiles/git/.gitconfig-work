@@ -3,14 +3,76 @@
 	; name = 
 	; email = 
 [core]
-    sshCommand = ssh -F ~/.ssh/config -i ~/.ssh/id_ed25519
+    sshCommand = ssh -F ~/.ssh/config -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes
 
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [credential]
 	helper = cache
 
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+        tool = nvimdiff
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = false
+        all = true
+
+
+[help]
+        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
+[core]
+        excludesfile = ~/.gitignore
 [rebase]
-	updateRefs = true
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
+[merge]
+    tool = nvimdiff
+    conflictstyle = zdiff3
+
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[pull]
+        rebase = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
