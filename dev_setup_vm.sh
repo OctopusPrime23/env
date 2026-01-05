@@ -6,11 +6,11 @@ sudo apt update
 sudo apt install -y wget
 
 # Download and extract Neovim
-wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-linux64.tar.gz
-tar xzvf nvim-linux64.tar.gz && rm nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage
+chmod u+x nvim-linux-x86_64.appimage
 
 # Create an alias for vim
-echo 'alias nvim=~/nvim-linux64/bin/nvim' >> ~/.zshrc
+echo 'alias nvim=~/nvim-linux-x86_64.appimage' >> ~/.zshrc
 
 # Clone NvChad starter repository
 git clone https://github.com/NvChad/starter ~/.config/nvim

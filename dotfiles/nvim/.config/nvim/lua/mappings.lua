@@ -38,6 +38,10 @@ map("n", "[M", "[Mzz", { noremap = true, silent = true })
 map("n", "]m", "]mzz", { noremap = true, silent = true })
 map("n", "[M", "[Mzz", { noremap = true, silent = true })
 
+km.set("n", "<leader>cp", function()
+  vim.fn.setreg("+", vim.fn.expand "%:p")
+end, { desc = "Copy full path of current buffer" })
+
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle {
     pos = "float",
