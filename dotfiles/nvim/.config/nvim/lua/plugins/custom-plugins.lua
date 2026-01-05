@@ -368,7 +368,7 @@ return {
         -- javascriptreact = { "eslint_d" },
         -- typescriptreact = { "eslint_d" },
         -- svelte = { "eslint_d" },
-        python = { "pylint" },
+        -- python = { "pylint" }, -- Disabled: using basedpyright for type checking and ruff for linting
         go = { "golangcilint" },
       }
       -- golangci-lint run --out-format json --issues-exit-code=1

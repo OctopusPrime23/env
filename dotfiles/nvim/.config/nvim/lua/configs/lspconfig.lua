@@ -11,6 +11,7 @@ local servers = {
   "eslint",
   "clangd",
   "lua_ls",
+  "basedpyright",
 }
 
 -- lsps with default config
@@ -51,4 +52,34 @@ lspconfig.ts_ls.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
+}
+
+-- python
+lspconfig.basedpyright.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  filetypes = { "python" },
+  root_dir = function(fname)
+    local root_files = {
+      'pyproject.toml',
+      'setup.py',
+      'setup.cfg',
+      'requirements.txt',
+      'Pipfile',
+      'pyrightconfig.json',
+      '.git',
+    }
+    return util.root_pattern(unpack(root_files))(fname)
+  end,
+  settings = {
+    basedpyright = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace",
+        typeCheckingMode = "basic",
+      },
+    },
+  },
 }

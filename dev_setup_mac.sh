@@ -18,7 +18,7 @@ mkdir jetbrainsmono && unzip JetBrainsMono.zip -d jetbrainsmono
 wget https://github.com/syncthing/syncthing-macos/releases/download/v1.27.12-1/Syncthing-1.27.12-1.dmg
 hdiutil attach Syncthing-1.27.12-1.dmg
 
-brew install ripgrep jq tmux zoxide docker dust htop libxml2 mysql lazygit nushell dlv ansible yq stow ffmpeg mkvtoolnix mediainfo
+brew install ripgrep jq tmux zoxide docker dust htop libxml2 mysql lazygit nushell dlv ansible yq stow ffmpeg mkvtoolnix mediainfo imagemagick ghostscript fzf jupyterlab libpq trash-cli python@3.14
 
 echo 'export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"\nexport LDFLAGS="-L/opt/homebrew/opt/libxml2/lib"\nexport CPPFLAGS="-I/opt/homebrew/opt/libxml2/include"' >> ~/.zshrc && source ~/.zshrc
 

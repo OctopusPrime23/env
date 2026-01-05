@@ -19,3 +19,5 @@ export MANPAGER='nvim +Man!'
 alias ld=lazydocker
 alias lg=lazygit
 source ~/.zshrc.work
+
+export COMPOSE_BAKE=true
