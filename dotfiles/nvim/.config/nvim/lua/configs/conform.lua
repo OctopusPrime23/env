@@ -6,6 +6,7 @@ local options = {
     go = { "goimports_reviser", "gofumpt", "golines" },
     -- You can also customize some of the format options for the filetype
     rust = { "rustfmt", lsp_format = "fallback" },
+    java = { "google-java-format" },
 
     html = { "prettier" },
     javascript = { "prettier", "trim_whitespace" },
@@ -121,6 +122,9 @@ local options = {
       end,
       exit_codes = { 0 },
       inherit = true,
+    },
+    ["google-java-format"] = {
+      prepend_args = {},
     },
     -- prettier = {
     --   command = "prettier",

@@ -27,7 +27,6 @@ M.mason = {
     "gofumpt",
     "golangci-lint",
     "golangci-lint-langserver",
-    "golangci_lint_ls",
     "gopls",
     "json-lsp",
     "jq",
@@ -38,7 +37,11 @@ M.mason = {
     "typescript-language-server",
     "prettier",
     "prettierd",
-    "lua_ls",
+    "lua-language-server",
+    "jdtls",
+    "google-java-format",
+    "checkstyle",
+    "java-debug-adapter",
   },
 }
 

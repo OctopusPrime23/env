@@ -370,6 +370,7 @@ return {
         -- svelte = { "eslint_d" },
         -- python = { "pylint" }, -- Disabled: using basedpyright for type checking and ruff for linting
         go = { "golangcilint" },
+        java = {},
       }
       -- golangci-lint run --out-format json --issues-exit-code=1
       -- lint.linters.golangcilint = {
@@ -512,6 +513,13 @@ return {
         { name = "path", group_index = 2 },
       }
     end,
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
   },
   {
     "nvim-neotest/neotest",
