@@ -1,9 +1,7 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
--- local capabilities = require("nvchad.configs.lspconfig").capabilities
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require "lspconfig"
-local util = require "lspconfig/util"
+
 local servers = {
   "html",
   "cssls",
@@ -12,23 +10,27 @@ local servers = {
   "clangd",
   "lua_ls",
   "basedpyright",
+  "ts_ls",
+  "gopls",
 }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
-lspconfig.gopls.setup {
+-- gopls with custom config
+vim.lsp.config("gopls", {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
-  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  root_markers = { "go.work", "go.mod", ".git" },
   settings = {
     gopls = {
       completeUnimported = true,
@@ -45,33 +47,23 @@ lspconfig.gopls.setup {
       gofumpt = true,
     },
   },
-}
+})
 
--- typescript
-lspconfig.ts_ls.setup {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-}
-
--- python
-lspconfig.basedpyright.setup {
+-- python with custom config
+vim.lsp.config("basedpyright", {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
   filetypes = { "python" },
-  root_dir = function(fname)
-    local root_files = {
-      'pyproject.toml',
-      'setup.py',
-      'setup.cfg',
-      'requirements.txt',
-      'Pipfile',
-      'pyrightconfig.json',
-      '.git',
-    }
-    return util.root_pattern(unpack(root_files))(fname)
-  end,
+  root_markers = {
+    "pyproject.toml",
+    "setup.py",
+    "setup.cfg",
+    "requirements.txt",
+    "Pipfile",
+    "pyrightconfig.json",
+    ".git",
+  },
   settings = {
     basedpyright = {
       analysis = {
@@ -82,4 +74,4 @@ lspconfig.basedpyright.setup {
       },
     },
   },
-}
+})

@@ -6,7 +6,7 @@ sudo apt update
 sudo apt install -y wget
 
 # Download and extract Neovim
-wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage
+wget https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.appimage
 chmod u+x nvim-linux-x86_64.appimage
 
 # Create an alias for vim

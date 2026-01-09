@@ -2,7 +2,7 @@ cd ~
 
 brew install wget
 
-wget https://github.com/neovim/neovim/releases/download/v0.10.0/nvim-macos-arm64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-macos-arm64.tar.gz
 xattr -c ./nvim-macos-arm64.tar.gz && tar xzvf nvim-macos-arm64.tar.gz && rm nvim-macos-arm64.tar.gz
 
 echo 'alias vim=~/nvim-macos-arm64/bin/nvim' >> ~/.zshrc
