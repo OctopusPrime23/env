@@ -304,12 +304,24 @@ return {
   {
     "crnvl96/lazydocker.nvim",
     event = "VeryLazy",
-    opts = {},
-    dependencies = {
-      "MunifTanjim/nui.nvim",
+    opts = {
+      window = {
+        settings = {
+          width = 0.9,
+          height = 0.7,
+          border = "rounded",
+          relative = "editor",
+        },
+      },
     },
     keys = {
-      { "<leader>ld", "<cmd>LazyDocker<cr>", desc = "LazyGit" },
+      {
+        "<leader>ld",
+        function()
+          require("lazydocker").toggle { engine = "docker" }
+        end,
+        desc = "LazyDocker",
+      },
     },
   },
   {
