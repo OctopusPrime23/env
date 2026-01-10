@@ -450,83 +450,6 @@ return {
     end,
   },
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    enabled = false,
-    event = "InsertEnter",
-    build = ":Copilot auth",
-    opts = {
-      suggestion = {
-        enabled = false,
-        auto_trigger = true,
-        debounce = 75,
-        keymap = {
-          accept = "<C-f>", -- accept the current suggestion in full
-          accept_word = "<C-w>", -- accept the current word
-          accept_line = "<C-l>", -- accept the current line
-          -- Cycle through suggestions
-          next = "<C-.>",
-          prev = "<C-/>",
-          dismiss = "<C-x>",
-        },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-        ["."] = true,
-        sh = function()
-          if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), "^%.env.*") then
-            -- disable for .env files
-            return false
-          end
-          return true
-        end,
-      },
-    },
-    config = function(_, opts)
-      require("copilot").setup(opts)
-    end,
-  },
-
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   optional = true,
-  --   event = "VeryLazy",
-  --   opts = function(_, opts)
-  --     local function copilot_indicator()
-  --       local clients = vim.lsp.get_clients { name = "copilot" }
-  --       local copilot_active = #clients > 0
-  --       return copilot_active and "󰚩 " or ""
-  --     end
-  --     table.insert(opts.sections.lualine_x, 2, { copilot_indicator })
-  --   end,
-  -- },
-
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        dependencies = "copilot.lua",
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
-    },
-    opts = function(_, opts)
-      local cmp = require "cmp"
-      opts.sources = cmp.config.sources {
-        { name = "copilot", group_index = 2 },
-        { name = "nvim_lsp", group_index = 2 },
-        { name = "luasnip", group_index = 2 },
-        { name = "buffer", group_index = 2 },
-        { name = "nvim_lua", group_index = 2 },
-        { name = "path", group_index = 2 },
-      }
-    end,
-  },
-  {
     "mfussenegger/nvim-jdtls",
     ft = "java",
     dependencies = {
@@ -679,23 +602,4 @@ return {
       },
     },
   },
-
-  -- {
-  --   "jackMort/ChatGPT.nvim",
-  --   enabled = false,
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("chatgpt").setup {
-  --       api_key_cmd = "ansible-vault view --vault-password-file=/tmp/v ~/dotfiles/secrets.yaml | yq eval .open_ai_api_key",
-  --     }
-  --   end,
-  --   dependencies = {
-  --     -- Do not install NUI as well
-  --     -- "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     -- do NOT install trouble, causes issues with nvchad's statusline
-  --     -- "folke/trouble.nvim", -- optional
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  -- },
 }
