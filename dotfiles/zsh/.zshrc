@@ -14,6 +14,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/usr/local/go/bin:$PATH"
 eval "$(zoxide init zsh)"
 export PATH=$PATH:$(go env GOPATH)/bin
+export PATH=$PATH:/usr/local/go/bin
 export MANPAGER='nvim +Man!'
 
 alias ld=lazydocker
@@ -21,3 +22,10 @@ alias lg=lazygit
 source ~/.zshrc.work
 
 export COMPOSE_BAKE=true
+
+alias yz=~/yazi-aarch64-apple-darwin/yazi
+eval "$(starship init zsh)"
+
+function chpwd {
+  ls -a --color
+}

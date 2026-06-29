@@ -38,9 +38,15 @@ map("n", "[M", "[Mzz", { noremap = true, silent = true })
 map("n", "]m", "]mzz", { noremap = true, silent = true })
 map("n", "[M", "[Mzz", { noremap = true, silent = true })
 
+vim.keymap.set("n", "<leader>cb", ":vnew | r !", { desc = "Run command in new buffer" })
+
 km.set("n", "<leader>cp", function()
   vim.fn.setreg("+", vim.fn.expand "%:p")
 end, { desc = "Copy full path of current buffer" })
+
+km.set("n", "<leader>grv", function()
+  vim.diagnostic.config { virtual_text = not vim.diagnostic.config().virtual_text }
+end, { desc = "LSP Toggle Virtual Text Diagnostics" })
 
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle {

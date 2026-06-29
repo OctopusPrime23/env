@@ -9,9 +9,7 @@ local servers = {
   "eslint",
   "clangd",
   "lua_ls",
-  "basedpyright",
   "ts_ls",
-  "gopls",
 }
 
 -- lsps with default config
@@ -24,13 +22,28 @@ for _, lsp in ipairs(servers) do
   vim.lsp.enable(lsp)
 end
 
+vim.lsp.config("rust-analyzer", {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = capabilities,
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+})
+vim.lsp.enable "rust-analyzer"
+
 -- gopls with custom config
 vim.lsp.config("gopls", {
   on_attach = on_attach,
+  on_init = on_init,
   capabilities = capabilities,
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
   root_markers = { "go.work", "go.mod", ".git" },
+  -- root_dir = function(fname)
+  --   -- First try go.work, then go.mod, fallback to .git
+  --   local util = vim.fs
+  --   return util.root(fname, { "go.work" }) or util.root(fname, { "go.mod" }) or util.root(fname, { ".git" })
+  -- end,
   settings = {
     gopls = {
       completeUnimported = true,
@@ -45,9 +58,14 @@ vim.lsp.config("gopls", {
       },
       staticcheck = true,
       gofumpt = true,
+      directoryFilters = {
+        "-**/node_modules",
+        "-**/vendor",
+      },
     },
   },
 })
+vim.lsp.enable "gopls"
 
 -- python with custom config
 vim.lsp.config("basedpyright", {
@@ -75,3 +93,4 @@ vim.lsp.config("basedpyright", {
     },
   },
 })
+vim.lsp.enable "basedpyright"

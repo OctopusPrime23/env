@@ -39,7 +39,7 @@ local options = {
   format_on_save = {
     -- I recommend these options. See :help conform.format for details.
     lsp_format = "fallback",
-    timeout_ms = 500,
+    timeout_ms = 1000,
   },
   -- If this is set, Conform will run the formatter asynchronously after save.
   -- It will pass the table to conform.format().
@@ -112,7 +112,7 @@ local options = {
     },
     golines = {
       command = "golines",
-      args = { "-m", "120", "-w", "$FILENAME" },
+      args = { "-m", "160", "-w", "$FILENAME" },
       range_args = nil,
       stdin = false,
       cwd = require("conform.util").root_file { ".editorconfig", "package.json", "go.mod" },

@@ -47,3 +47,5 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.commentstring = "-- %s"
   end,
 })
+
+vim.diagnostic.config { virtual_text = true }

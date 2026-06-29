@@ -126,7 +126,7 @@ return {
       }
 
       opts.incremental_selection = {
-        enable = true,
+        enable = false,
         keymaps = {
           init_selection = "<C-m>",
           node_incremental = "<C-m>",

@@ -5,12 +5,27 @@ cd ~
 sudo apt update
 sudo apt install -y wget
 
+wget https://github.com/sxyazi/yazi/releases/download/v26.5.6/yazi-aarch64-apple-darwin.zip
+unzip yazi-aarch64-apple-darwin.zip
+echo 'alias yz=~/yazi-aarch64-apple-darwin/yazi' >> ~/.zshrc
+echo 'alias yz=~/yazi-aarch64-apple-darwin/yazi' >> ~/.bashrc
+
+curl -sS https://starship.rs/install.sh | sh
+echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+echo 'eval "$(starship init bash)"' >> ~/.bashrc
+
 # Download and extract Neovim
 wget https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.appimage
 chmod u+x nvim-linux-x86_64.appimage
 
 # Create an alias for vim
 echo 'alias nvim=~/nvim-linux-x86_64.appimage' >> ~/.zshrc
+echo 'alias nvim=~/nvim-linux-x86_64.appimage' >> ~/.bashrc
+
+wget https://github.com/nushell/nushell/releases/download/0.113.1/nu-0.113.1-x86_64-unknown-linux-gnu.tar.gz
+tar xzvf nu-0.113.1-x86_64-unknown-linux-gnu.tar.gz && rm nu-0.113.1-x86_64-unknown-linux-gnu.tar.gz
+echo 'alias nu=~/nu-0.113.1-x86_64-unknown-linux-gnu/nu' >> ~/.zshrc
+echo 'alias nu=~/nu-0.113.1-x86_64-unknown-linux-gnu/nu' >> ~/.bashrc
 
 # Clone NvChad starter repository
 git clone https://github.com/NvChad/starter ~/.config/nvim
@@ -45,3 +60,6 @@ go install github.com/segmentio/golines@latest
 go install -v github.com/incu6us/goimports-reviser/v3@latest
 source ~/.zshrc
 source ~/.bashrc
+
+# making the server understand ghostty's capabilities
+infocmp -x xterm-ghostty | ssh SERVER -- tic -x -
