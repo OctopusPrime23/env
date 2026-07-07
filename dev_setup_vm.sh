@@ -1,6 +1,22 @@
 # Change to home directory
 cd ~
 
+echo 'bindkey -v' >> ~/.zshrc
+# Also enable emacs style searches
+echo "bindkey '^R' history-incremental-search-backward" >> ~/.zshrc
+echo "bindkey '^S' history-incremental-search-forward" >> ~/.zshrc  # Ctrl+S for forward search
+echo "bindkey '^A' beginning-of-line" >> ~/.zshrc
+echo "bindkey '^E' end-of-line" >> ~/.zshrc
+
+echo 'set -o vi' >> ~/.bashrc
+# Also enable emacs style searches
+echo "bind -m vi-insert '\"\\C-r\": history-search-backward'" >> ~/.bashrc
+echo "bind -m vi-insert '\"\\C-s\": history-search-forward'" >> ~/.bashrc  # Ctrl+S for forward search
+echo "bind -m vi-insert '\"\\C-a\": beginning-of-line'" >> ~/.bashrc
+echo "bind -m vi-insert '\"\\C-e\": end-of-line'" >> ~/.bashrc
+
+echo 'set editing-mode vi' >> ~/.inputrc
+
 # Install wget using apt (Ubuntu's package manager)
 sudo apt update
 sudo apt install -y wget
@@ -21,6 +37,10 @@ chmod u+x nvim-linux-x86_64.appimage
 # Create an alias for vim
 echo 'alias nvim=~/nvim-linux-x86_64.appimage' >> ~/.zshrc
 echo 'alias nvim=~/nvim-linux-x86_64.appimage' >> ~/.bashrc
+echo 'export PSQL_EDITOR=~/nvim-linux-x86_64.appimage' >> ~/.zshrc
+echo 'export PSQL_EDITOR=~/nvim-linux-x86_64.appimage' >> ~/.bashrc
+echo 'export EDITOR=~/nvim-linux-x86_64.appimage' >> ~/.zshrc
+echo 'export EDITOR=~/nvim-linux-x86_64.appimage' >> ~/.bashrc
 
 wget https://github.com/nushell/nushell/releases/download/0.113.1/nu-0.113.1-x86_64-unknown-linux-gnu.tar.gz
 tar xzvf nu-0.113.1-x86_64-unknown-linux-gnu.tar.gz && rm nu-0.113.1-x86_64-unknown-linux-gnu.tar.gz

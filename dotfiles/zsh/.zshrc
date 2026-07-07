@@ -25,6 +25,11 @@ alias lg=lazygit
 source ~/.zshrc.work
 
 export COMPOSE_BAKE=true
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
 
 alias yz=~/yazi-aarch64-apple-darwin/yazi
 eval "$(starship init zsh)"
