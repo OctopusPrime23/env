@@ -3,6 +3,9 @@ export PATH="~/nvim-macos-arm64/bin:$PATH"
 
 alias vim=~/nvim-macos-arm64/bin/nvim
 alias nvim=~/nvim-macos-arm64/bin/nvim
+export PSQL_EDITOR=~/nvim-macos-arm64/bin/nvim
+export EDITOR=~/nvim-macos-arm64/bin/nvim
+
 export PATH="/opt/homebrew/opt/libxml2/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/libxml2/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/libxml2/include"
