@@ -10,6 +10,7 @@ local servers = {
   "clangd",
   "lua_ls",
   "ts_ls",
+  "rust_analyzer",
 }
 
 -- lsps with default config
@@ -21,15 +22,6 @@ for _, lsp in ipairs(servers) do
   })
   vim.lsp.enable(lsp)
 end
-
-vim.lsp.config("rust-analyzer", {
-  on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  cmd = { "rust-analyzer" },
-  filetypes = { "rust" },
-})
-vim.lsp.enable "rust-analyzer"
 
 -- gopls with custom config
 vim.lsp.config("gopls", {
