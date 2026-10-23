@@ -61,11 +61,13 @@ if command -v starship >/dev/null 2>&1; then skip "starship"; else curl -sS http
 [ -f ~/.config/starship.toml ] || starship preset catppuccin-powerline -o ~/.config/starship.toml
 
 # Neovim
-if [ -x ~/nvim-macos-arm64/bin/nvim ]; then
-  skip "neovim"
+NVIM_VERSION=v0.12.5
+if [ -x ~/nvim-macos-arm64/bin/nvim ] && [ "$(~/nvim-macos-arm64/bin/nvim --version | head -1)" = "NVIM $NVIM_VERSION" ]; then
+  skip "neovim $NVIM_VERSION"
 else
-  wget https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-macos-arm64.tar.gz
-  xattr -c ./nvim-macos-arm64.tar.gz && tar xzvf nvim-macos-arm64.tar.gz && rm nvim-macos-arm64.tar.gz
+  wget https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim-macos-arm64.tar.gz
+  rm -rf ~/nvim-macos-arm64
+  xattr -c ./nvim-macos-arm64.tar.gz && tar xzf nvim-macos-arm64.tar.gz && rm nvim-macos-arm64.tar.gz
 fi
 
 # Nerd fonts

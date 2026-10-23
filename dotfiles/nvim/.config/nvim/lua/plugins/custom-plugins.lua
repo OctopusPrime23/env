@@ -1,4 +1,5 @@
 return {
+  { "nvchad/base46", branch = "v2.5" },
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
@@ -140,6 +141,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "master",
     lazy = true,
     config = function()
       local opt = require "configs.nvim-treesitter-textobjects"
