@@ -1,1 +1,3 @@
 dotfiles/nvim/.local
+dotfiles/ssh/.ssh/*
+!dotfiles/ssh/.ssh/config
