@@ -438,6 +438,8 @@ return {
   },
   {
     "3rd/image.nvim",
+    -- skip the luarocks build: the default magick_cli processor only needs the ImageMagick CLI
+    build = false,
     dependencies = {},
     ft = { "png", "jpg", "jpeg", "webp", "gif", "svg" },
     event = "BufReadPre",
