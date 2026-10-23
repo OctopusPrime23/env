@@ -22,7 +22,7 @@ export MANPAGER='nvim +Man!'
 
 alias ld=lazydocker
 alias lg=lazygit
-source ~/.zshrc.work
+[ -f ~/.zshrc.work ] && source ~/.zshrc.work
 
 export COMPOSE_BAKE=true
 bindkey -v
@@ -37,3 +37,4 @@ eval "$(starship init zsh)"
 function chpwd {
   ls -a --color
 }
+export PATH="$HOME/.local/bin:$PATH"
