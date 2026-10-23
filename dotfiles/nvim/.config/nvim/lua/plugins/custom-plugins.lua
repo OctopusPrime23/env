@@ -1,5 +1,4 @@
 return {
-  { "nvchad/base46", branch = "v2.5" },
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
@@ -126,37 +125,56 @@ return {
         "zig",
       }
 
-      opts.incremental_selection = {
-        enable = false,
-        keymaps = {
-          init_selection = "<C-m>",
-          node_incremental = "<C-m>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      }
-
       return opts
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "master",
+    branch = "main",
     lazy = true,
     config = function()
-      local opt = require "configs.nvim-treesitter-textobjects"
-      require("nvim-treesitter.configs").setup(opt)
-      local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
+      local cfg = require "configs.nvim-treesitter-textobjects"
+      require("nvim-treesitter-textobjects").setup(cfg.opts)
+
+      local select = require "nvim-treesitter-textobjects.select"
+      for lhs, m in pairs(cfg.select) do
+        vim.keymap.set({ "x", "o" }, lhs, function()
+          select.select_textobject(m.query, "textobjects")
+        end, { desc = m.desc })
+      end
+
+      local swap = require "nvim-treesitter-textobjects.swap"
+      for lhs, query in pairs(cfg.swap_next) do
+        vim.keymap.set("n", lhs, function()
+          swap.swap_next(query)
+        end)
+      end
+      for lhs, query in pairs(cfg.swap_previous) do
+        vim.keymap.set("n", lhs, function()
+          swap.swap_previous(query)
+        end)
+      end
+
+      local move = require "nvim-treesitter-textobjects.move"
+      for fn, maps in pairs(cfg.move) do
+        for lhs, m in pairs(maps) do
+          vim.keymap.set({ "n", "x", "o" }, lhs, function()
+            move[fn](m.query, m.query_group or "textobjects")
+          end, { desc = m.desc })
+        end
+      end
+
+      local ts_repeat_move = require "nvim-treesitter-textobjects.repeatable_move"
 
       -- vim way: ; goes to the direction you were moving.
       vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
       vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
 
       -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+      vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+      vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
     end,
   },
   {

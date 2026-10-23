@@ -20,7 +20,6 @@ require("lazy").setup({
     "NvChad/NvChad",
     lazy = false,
     branch = "v2.5",
-    commit = "30e75dbbdf33f393430d6e7612dd32ef84e2a710",
     import = "nvchad.plugins",
   },
   -- {

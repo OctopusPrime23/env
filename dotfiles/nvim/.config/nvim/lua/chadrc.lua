@@ -1,10 +1,10 @@
 -- This file needs to have same structure as nvconfig.lua
--- https://github.com/NvChad/ui/blob/v2.5/lua/nvconfig.lua
+-- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
 
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = {
+M.base46 = {
 
   theme = "palenight",
 

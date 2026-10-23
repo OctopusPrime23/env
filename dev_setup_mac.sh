@@ -25,7 +25,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Brew packages
 BREW_PACKAGES=(
   wget ripgrep jq tmux zoxide docker dust htop libxml2 mysql lazygit lazydocker nushell dlv ansible yq stow
-  ffmpeg mkvtoolnix mediainfo imagemagick ghostscript fzf jupyterlab libpq trash-cli python@3.14
+  ffmpeg mkvtoolnix mediainfo imagemagick ghostscript fzf jupyterlab libpq trash-cli python@3.14 tree-sitter-cli
 )
 missing=()
 for pkg in "${BREW_PACKAGES[@]}"; do
