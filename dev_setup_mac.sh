@@ -122,6 +122,22 @@ GOBIN_DIR="$(go env GOPATH)/bin"
 [ -x "$GOBIN_DIR/goimports-reviser" ] && skip "goimports-reviser" || go install -v github.com/incu6us/goimports-reviser/v3@latest
 # install docker desktop
 
+# Key repeat: holding a letter (e.g. j/k in nvim) repeats instead of opening the accent picker.
+# Takes effect after relaunching apps.
+if [ "$(defaults read -g ApplePressAndHoldEnabled 2>/dev/null)" = "0" ]; then
+  skip "press-and-hold disabled"
+else
+  defaults write -g ApplePressAndHoldEnabled -bool false
+fi
+
+# Key repeat rate and shorter-than-slider initial delay (units of ~15ms). Takes effect after logging out.
+if [ "$(defaults read -g KeyRepeat 2>/dev/null)" = "5" ] && [ "$(defaults read -g InitialKeyRepeat 2>/dev/null)" = "10" ]; then
+  skip "fast key repeat"
+else
+  defaults write -g KeyRepeat -int 5
+  defaults write -g InitialKeyRepeat -int 10
+fi
+
 # Weekly cleanup of old nvim backups
 CRON_LINE="0 12 * * 0 find $HOME/.local/share/nvim/backups/ -type f -mtime +30 -exec rm -f {} \;"
 if crontab -l 2>/dev/null | grep -qxF -- "$CRON_LINE"; then
